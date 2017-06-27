@@ -52,6 +52,6 @@ module.exports = {
   appNodeModules: resolveApp('node_modules'),
   publicUrl: getPublicUrl(resolveApp('package.json')),
   servedPath: getServedPath(resolveApp('package.json')),
-  expressJs: path.resolve('./../assets/js')
+  expressJs: path.resolve('./../assets/js/webpack')
 };
 

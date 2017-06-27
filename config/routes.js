@@ -57,8 +57,11 @@ module.exports.routes = {
   'GET /signup': {
     view: 'signup'
   },
-  
+
   'GET /chat': {
     view: 'chat'
-  }
+  },
+    
+  'GET /say/hello': 'HelloController.hello',
+
 };

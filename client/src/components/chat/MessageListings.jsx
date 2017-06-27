@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Button, Header, Icon, Modal, Input } from 'semantic-ui-react'
 import Channel from './Channel';
 
+const { io } = window;
+
 export default class MessageListings extends Component {
 
   constructor(props) {
@@ -18,6 +20,12 @@ export default class MessageListings extends Component {
   addChannel = () => {
     console.log('add channel');
     this.setState({ showModal: true });
+  }
+
+  componentDidMount = () => {
+    io.socket.get('/say/hello', function gotResponse(data, jwRes) {
+      console.log('Server responded with status code ' + jwRes.statusCode + ' and data: ', data);
+    });
   }
   
   render = () => {

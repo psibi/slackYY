@@ -1,3 +1,4 @@
+import Channel from './Channel';
 import React from 'react';
 
 export function MessageListings() {
@@ -8,31 +9,19 @@ export function MessageListings() {
         <span className="listings_add">+</span>
         <ul className="channel_list">
           <li className="channel active">
-            <a className="channel_name">
-              <span className="unread">0</span>
-              <span>
-                <span className="prefix">#</span>
-                admin
-              </span>
-            </a>
+            <Channel name={"admin"} unread={0} />
           </li>
           <li className="channel">
-            <a className="channel_name">
-              <span className="unread">10</span>
-              <span>
-                <span className="prefix">#</span>
-                general
-              </span>
-            </a>
+            <Channel name={"general"} unread={20} />
           </li>
         </ul>
       </div>
-      <div className="listings_direct-messages">
-        <h2 className="listings_header">Direct Messages</h2>
-        <ul className="channel_list">
+      {/* <div className="listings_direct-messages">
+          <h2 className="listings_header">Direct Messages</h2>
+          <ul className="channel_list">
           <li className="channel"><a className="channel_name"><span className="unread">20</span><span><span className="prefix"> </span>kryton</span></a></li>
-        </ul>
-      </div>
+          </ul>
+          </div> */}
     </div>
   )
 }

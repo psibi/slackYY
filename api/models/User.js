@@ -5,13 +5,11 @@
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 
+const bcrypt = require('bcrypt');
+
 module.exports = {
   tableName: 'user',
   attributes: {
-    name: {
-      type: 'string',
-      columnName: 'name'
-    },
     password: {
       type: 'string',
       columnName: 'password'
@@ -20,7 +18,25 @@ module.exports = {
       type: 'email',
       unique: true,
       columnName: 'email_address'
-    }
+    },
+    toJSON: function() {
+      var obj = this.toObject();
+      delete obj.password;
+      return obj;
+    }    
+  },
+  beforeCreate: function(user, cb) {
+    bcrypt.genSalt(10, function(err, salt) {
+      bcrypt.hash(user.password, salt, function(err, hash) {
+        if (err) {
+          console.log(err);
+          cb(err);
+        } else {
+          user.password = hash;
+          cb();
+        }
+      });
+    });
   }
 };
 

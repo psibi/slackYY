@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import { ChatHeader } from './components/chat/ChatHeader';
 import { ChatFooter } from './components/chat/ChatFooter';
 import { MessageListings } from './components/chat/MessageListings';

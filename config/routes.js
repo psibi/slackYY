@@ -56,5 +56,9 @@ module.exports.routes = {
 
   'GET /signup': {
     view: 'signup'
+  },
+  
+  'GET /chat': {
+    view: 'chat'
   }
 };

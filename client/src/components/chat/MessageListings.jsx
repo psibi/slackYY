@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Header, Icon, Modal } from 'semantic-ui-react'
+import { Button, Header, Icon, Modal, Input } from 'semantic-ui-react'
 import Channel from './Channel';
 
 export default class MessageListings extends Component {
@@ -34,20 +34,21 @@ export default class MessageListings extends Component {
               <Channel name={"general"} unread={20} />
             </li>
           </ul>
-          <Modal
-            trigger={<Button onClick={this.addChannel}>Show Modal</Button>}
+          <Modal 
             open={this.state.showModal}
             onClose={this.hideModal}
-            basic
-            size='small'
-          >
-            <Header icon='browser' content='Cookies policy' />
+            basic size='small'>
+            <Header icon='archive' content='Archive Old Messages' />
             <Modal.Content>
-              <h3>This website uses cookies to ensure the best user experience.</h3>
+              <p>Channel name</p>
+              <Input focus placeholder="Channel nam..." />
             </Modal.Content>
             <Modal.Actions>
-              <Button color='green' onClick={this.hideModal} inverted>
-                <Icon name='checkmark' /> Got it
+              <Button basic color='red' inverted>
+                <Icon name='remove' /> No
+              </Button>
+              <Button color='green' inverted>
+                <Icon name='checkmark' /> Yes
               </Button>
             </Modal.Actions>
           </Modal>

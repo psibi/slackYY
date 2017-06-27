@@ -35,3 +35,7 @@ curl "http://localhost:1337/channel/find?id=2"
 This also works which is more clean (Follows REST more faithfully):
 
 curl -d '{"name":"channel3"}' -H "Content-Type: application/json" -X POST http://localhost:1337/channel/create
+
+Example of adding Message:
+
+curl -d '{"msg":"dummy msg", "userName": "sibi", "channel": 1}' -H "Content-Type: application/json" -X POST http://localhost:1337/message/create

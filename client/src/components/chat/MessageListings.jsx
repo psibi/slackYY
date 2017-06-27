@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Button, Header, Icon, Modal, Input } from 'semantic-ui-react'
+import { connect } from 'react-redux';
 import Channel from './Channel';
+import { fetchChannel } from '../../actions/channel';
 
 const { io } = window;
 
-export default class MessageListings extends Component {
+class MessageListings extends Component {
 
   constructor(props) {
     super(props);
@@ -23,6 +25,9 @@ export default class MessageListings extends Component {
   }
 
   componentDidMount = () => {
+    console.log('nope');
+    this.props.dispatch(fetchChannel());
+    
     io.socket.get('/say/hello', function gotResponse(data, jwRes) {
       console.log('Server responded with status code ' + jwRes.statusCode + ' and data: ', data);
     });
@@ -71,3 +76,5 @@ export default class MessageListings extends Component {
     )
   }
 }
+
+export default connect(null)(MessageListings);

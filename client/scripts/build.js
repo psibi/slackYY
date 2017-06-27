@@ -36,11 +36,11 @@ if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
 
 // First, read the current file sizes in build directory.
 // This lets us display how much they changed later.
-measureFileSizesBeforeBuild(paths.appBuild)
+measureFileSizesBeforeBuild(paths.expressJs)
   .then(previousFileSizes => {
     // Remove all content but keep the directory so that
     // if you're in it, you don't end up in Trash
-    fs.emptyDirSync(paths.appBuild);
+    fs.emptyDirSync(paths.expressJs);
     // Merge with the public folder
     copyPublicFolder();
     // Start the webpack build
@@ -66,13 +66,13 @@ measureFileSizesBeforeBuild(paths.appBuild)
       }
 
       console.log('File sizes after gzip:\n');
-      printFileSizesAfterBuild(stats, previousFileSizes, paths.appBuild);
+      printFileSizesAfterBuild(stats, previousFileSizes, paths.expressJs);
       console.log();
 
       const appPackage = require(paths.appPackageJson);
       const publicUrl = paths.publicUrl;
       const publicPath = config.output.publicPath;
-      const buildFolder = path.relative(process.cwd(), paths.appBuild);
+      const buildFolder = path.relative(process.cwd(), paths.expressJs);
       printHostingInstructions(
         appPackage,
         publicUrl,
@@ -121,7 +121,7 @@ function build(previousFileSizes) {
 }
 
 function copyPublicFolder() {
-  fs.copySync(paths.appPublic, paths.appBuild, {
+  fs.copySync(paths.appPublic, paths.expressJs, {
     dereference: true,
     filter: file => file !== paths.appHtml,
   });

@@ -1,10 +1,13 @@
 import { 
   RECEIVE_CHANNEL_MESSAGE,
   UPDATE_MESSAGE,
+  RECEIVE_CHAT_MESSAGE,
 } from './types';
 import {
   checkStatus,
 } from '../helpers/utils';
+
+const { io } = window;
 
 export function fetchMessage(channelId) {
   return (dispatch) => {
@@ -20,7 +23,7 @@ export function fetchMessage(channelId) {
   };
 }
 
-export function createMessage(msg, channelId) {
+export function createMessage(msg, channelId, channelName) {
   return (dispatch) => {
     return fetch('/message/create', {
       method: 'POST',
@@ -35,6 +38,12 @@ export function createMessage(msg, channelId) {
       .then(response => response.json())
       .then((data) => {
         dispatch(updateMessage(data))
+        io.socket.get('/chat/channel/message', 
+                      {
+                        channelId: channelId, 
+                        msg: msg, 
+                        channelName,
+                      });
       });
   }
 }
@@ -48,4 +57,9 @@ export const receiveMessage = (channelId, json) => ({
 export const updateMessage = (json) => ({
   type: UPDATE_MESSAGE,
   data: json,
+});
+
+export const receivedChatMessage = (message) => ({
+  type: RECEIVE_CHAT_MESSAGE,
+  message,
 });

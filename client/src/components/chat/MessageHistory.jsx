@@ -20,7 +20,7 @@ class MessageHistory extends Component {
   
   componentWillReceiveProps = (nextProps) => {
     if (nextProps.currentChannelId !== this.props.currentChannelId) {
-      if (_.isUndefined(this.props.messageData[this.props.currentChannelId])) {
+      if (_.isUndefined(nextProps.messageData[nextProps.currentChannelId])) {
         this.props.dispatch(fetchMessage(nextProps.currentChannelId));
       }
     }

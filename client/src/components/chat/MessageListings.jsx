@@ -5,7 +5,7 @@ import _ from 'lodash';
 import Channel from './Channel';
 import { fetchChannel, createChannel } from '../../actions/channel';
 import { updateCurrentChannel } from '../../actions/meta';
-import { fetchMessage } from '../../actions/message';
+import { fetchMessage, receivedChatMessage } from '../../actions/message';
 
 const { io } = window;
 
@@ -30,8 +30,10 @@ class MessageListings extends Component {
 
   componentDidMount = () => {
     console.log('nope');
+    const { dispatch } = this.props;
     this.props.dispatch(fetchChannel());
     io.socket.on('chatBroadcast', function gotResponse(data) {
+      dispatch(receivedChatMessage(data));
       console.log('got data', data);
     });
     /* io.socket.get('/say/hello', function gotResponse(data, jwRes) {
@@ -40,10 +42,12 @@ class MessageListings extends Component {
   }
   
   componentWillReceiveProps = (nextProps) => {
+    console.log('comp', nextProps);
     if (nextProps.currentChannelId !== this.props.currentChannelId) {
-      console.log('not equal');
-    }
-    console.log('equal');
+      if (_.isUndefined(nextProps.messageData[nextProps.currentChannelId])) {
+        this.props.dispatch(fetchMessage(nextProps.currentChannelId));
+      }
+    }    
   }
   
   createNewChannel = () => {
@@ -120,6 +124,7 @@ class MessageListings extends Component {
 
 const mapStateToProps = state => ({
   channelInfo: state.channel.channelInfo,
+  messageData: state.message.messageData,
   currentChannelId: state.meta.currentChannelId,
 });
 

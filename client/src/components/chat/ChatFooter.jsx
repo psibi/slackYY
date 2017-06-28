@@ -22,13 +22,14 @@ class ChatFooter extends Component {
     const { currentChannelId, currentChannel } = this.props;
     if (e.key === 'Enter') {
       console.log('sending', this.props);
-      io.socket.get('/chat/channel/message', 
-                    {
-                      channelId: currentChannelId, 
-                      msg: msg, 
-                      channelName: currentChannel,
-                    });
-      this.props.dispatch(createMessage(msg, currentChannelId));
+      /* io.socket.get('/chat/channel/message', 
+       *               {
+       *                 channelId: currentChannelId, 
+       *                 msg: msg, 
+       *                 channelName: currentChannel,
+       *               });*/
+    
+      this.props.dispatch(createMessage(msg, currentChannelId, currentChannel));
       this.setState({msg: ''});
     }
   }

@@ -16,11 +16,24 @@ module.exports = {
     const channelName = req.param('channelName');
     const channelId = req.param('channelId');
     const msg = req.param('msg');
+    /* Message.findOne(
+     *   {
+     *     msg: msg,
+     *     sort: 'createdAt DESC'
+     *   }).exec(function(err, message) {
+     *     sails.sockets.broadcast(channelName, 'chatBroadcast', message);
+     *     console.log('message', message);
+     *     res.json(message)
+     * });*/
     console.log('dfa', channelName, channelId, msg);
-    sails.sockets.broadcast(channelName, 'chatBroadcast', { channelId: channelId, msg: msg });
-    
-    return res.json({
-      anyData: 'from send msg'
+    Message.findOne({
+      msg: msg,
+      sort: 'createdAt DESC'
+    }).then(function(message) {
+      if (!message) return res.notFound();
+      sails.sockets.broadcast(channelName, 'chatBroadcast', message);
+      console.log('msg', message);
+      return res.json(message);
     });
   },
 
@@ -39,7 +52,7 @@ module.exports = {
     // Broadcast a notification to all the sockets who have joined
     // the "funSockets" room, excluding our newly added socket:
     /* TODO: Add notification */
-    sails.sockets.broadcast(channelName, 'chatBroadcast', { howdy: 'hi there!'});
+    /* sails.sockets.broadcast(channelName, 'chatBroadcast', { howdy: 'hi there!'});*/
 
     // ^^^
     // At this point, we've blasted out a socket message to all sockets who have

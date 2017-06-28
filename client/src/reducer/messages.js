@@ -1,6 +1,7 @@
 import { 
   RECEIVE_CHANNEL_MESSAGE,
   UPDATE_MESSAGE,
+  RECEIVE_CHAT_MESSAGE
 } from '../actions/types';
 
 const initialMessageState = {
@@ -17,8 +18,20 @@ function message(state = initialMessageState, action) {
           [action.channelId]: action.data,
         }
       };
+    case RECEIVE_CHAT_MESSAGE: {
+      const { messageData } = {...state};
+      const newMsgData = {
+        [action.message.channel]: [...messageData[action.message.channel], action.message]
+      };
+      return {
+        ...state,
+        messageData: newMsgData
+      }
+    }
     case UPDATE_MESSAGE:
-      return state;
+      return {
+        ...state,
+      }
     default:
       return state;
   }

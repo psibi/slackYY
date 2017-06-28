@@ -5,6 +5,7 @@ import
 
 const initialChannelState = {
   channelInfo: [],
+  messages: {},
 };
 
 function channel(state = initialChannelState, action) {

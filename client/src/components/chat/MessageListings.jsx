@@ -44,10 +44,16 @@ class MessageListings extends Component {
       channelName: '', 
       showModal: false,
     });
-
-    io.socket.get('/say/hello', {channelName: this.state.channelName},  function gotResponse(data, jwRes) {
+    io.socket.get('/chat/channel/join', {channelName: this.state.channelName},  function gotResponse(data, jwRes) {
       console.log('Server responded with status code ' + jwRes.statusCode + ' and data: ', data);
     });
+  }
+
+  joinChannel = (channelName) => {
+    io.socket.get('/chat/channel/join', {channelName: channelName},  function gotResponse(data, jwRes) {
+      console.log('Server responded with status code ' + jwRes.statusCode + ' and data: ', data);
+    });
+    // Also retrieve channel messages
   }
   
   onStaticChange = (e) => {

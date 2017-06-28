@@ -18,7 +18,12 @@ export class ChatFooter extends Component {
   handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       console.log('sending');
-      io.socket.get('/chat/message', {channelId: 1, msg: this.state.msg, channelName: 'dump'});
+      io.socket.get('/chat/channel/message', 
+                    {
+                      channelId: 1, 
+                      msg: this.state.msg, 
+                      channelName: 'dump'
+                    });
     }
   }
 

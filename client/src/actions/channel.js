@@ -5,6 +5,7 @@ import {
 import {
   checkStatus,
 } from '../helpers/utils';
+import { updateCurrentChannel } from './meta';
 
 export function fetchChannel() {
   return (dispatch) => {
@@ -29,7 +30,8 @@ export function createChannel(channelName) {
       .then(checkStatus)
       .then(response => response.json())
       .then((data) => {
-        dispatch(updateChannel(data))
+        dispatch(updateChannel(data));
+        dispatch(updateCurrentChannel(channelName, data.id));
       });
   }
 }

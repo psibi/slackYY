@@ -1,7 +1,7 @@
 import { RECEIVE_CHANNEL } from '../actions/types';
 
 const initialChannelState = {
-  channel: [],
+  channelInfo: [],
 };
 
 function channel(state = initialChannelState, action) {
@@ -9,7 +9,7 @@ function channel(state = initialChannelState, action) {
     case RECEIVE_CHANNEL:
       return {
         ...state,
-        channel: action.data,
+        channelInfo: action.data,
       };
     default:
       return state;

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Header, Icon, Modal, Input } from 'semantic-ui-react'
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import Channel from './Channel';
 import { fetchChannel } from '../../actions/channel';
 
@@ -40,12 +41,15 @@ class MessageListings extends Component {
           <h2 className="listings_header">Channels</h2>
           <span onClick={this.addChannel} className="listings_add">+</span>
           <ul className="channel_list">
-            <li className="channel active">
-              <Channel name={"admin"} unread={0} />
-            </li>
-            <li className="channel">
-              <Channel name={"general"} unread={20} />
-            </li>
+            {
+              _.map(this.props.channelInfo, (elem) => {
+                return (
+                  <li className="channel active" key={elem.id}>
+                    <Channel name={elem.name} unread={0} />
+                  </li>
+                );
+              })
+            }
           </ul>
           <Modal 
             open={this.state.showModal}
@@ -77,4 +81,8 @@ class MessageListings extends Component {
   }
 }
 
-export default connect(null)(MessageListings);
+const mapStateToProps = state => ({
+  channelInfo: state.channel.channelInfo,
+});
+
+export default connect(mapStateToProps)(MessageListings);

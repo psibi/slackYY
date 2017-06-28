@@ -19,6 +19,10 @@ module.exports = {
       unique: true,
       columnName: 'email_address'
     },
+    name: {
+      type: 'string',
+      columnName: 'user_name'
+    },
     toJSON: function() {
       var obj = this.toObject();
       delete obj.password;

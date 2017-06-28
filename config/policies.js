@@ -34,6 +34,10 @@ module.exports.policies = {
   
   'ChatController': {
     '*': 'isAuthenticated'
+  },
+  
+  'UserController': {
+    'currentUser': 'isAuthenticated'
   }
 
   /***************************************************************************

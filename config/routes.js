@@ -66,6 +66,8 @@ module.exports.routes = {
   
   'GET /chat/channel/join': 'HelloController.hello',
   
-  'GET /chat/channel/message': 'HelloController.sendMessage'
+  'GET /chat/channel/message': 'HelloController.sendMessage',
+  
+  'GET /currentUser': 'UserController.currentUser'
 
 };

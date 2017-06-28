@@ -6,6 +6,22 @@
  */
 
 module.exports = {
+  
+  sendMessage: function(req, res) {
+    // Make sure this is a socket request (not traditional HTTP)
+    if (!req.isSocket) {
+      return res.badRequest();
+    }
+    
+    const channelName = req.param('channelName');
+    const channelId = req.param('channelId');
+    const msg = req.param('msg');
+    sails.sockets.broadcast(channelName, 'chatBroadcast', { channelId: channelId, msg: msg }, req);
+    
+    return res.json({
+      anyData: 'from send msg'
+    });
+  },
 
   hello: function(req, res) {
 
@@ -14,12 +30,15 @@ module.exports = {
       return res.badRequest();
     }
 
-    // Have the socket which made the request join the "funSockets" room.
-    sails.sockets.join(req, 'funSockets');
+    const channelName = req.param('channelName');
+    console.log('data dump', channelName);
+    // Have the socket which made the request join the room.
+    sails.sockets.join(req, channelName);
 
     // Broadcast a notification to all the sockets who have joined
     // the "funSockets" room, excluding our newly added socket:
-    sails.sockets.broadcast('funSockets', 'hello', { howdy: 'hi there!'}, req);
+    /* TODO: Add notification */
+    sails.sockets.broadcast(channelName, 'chatBroadcast', { howdy: 'hi there!'});
 
     // ^^^
     // At this point, we've blasted out a socket message to all sockets who have

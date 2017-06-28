@@ -1,7 +1,8 @@
 import fetch from 'isomorphic-fetch';
 
 export function checkStatus(response) {
-  if (response.status === 200) {
+  console.log('resp', response);
+  if (response.status >= 200 && response.status <= 299) {
     return response;
   }
   const error = new Error(response.statusText);

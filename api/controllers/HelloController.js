@@ -16,7 +16,8 @@ module.exports = {
     const channelName = req.param('channelName');
     const channelId = req.param('channelId');
     const msg = req.param('msg');
-    sails.sockets.broadcast(channelName, 'chatBroadcast', { channelId: channelId, msg: msg }, req);
+    console.log('dfa', channelName, channelId, msg);
+    sails.sockets.broadcast(channelName, 'chatBroadcast', { channelId: channelId, msg: msg });
     
     return res.json({
       anyData: 'from send msg'

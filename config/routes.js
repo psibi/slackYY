@@ -63,5 +63,7 @@ module.exports.routes = {
   },
     
   'GET /say/hello': 'HelloController.hello',
+  
+  'GET /chat/message': 'HelloController.sendMessage'
 
 };

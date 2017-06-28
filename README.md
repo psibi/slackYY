@@ -20,6 +20,13 @@ cd ..
 
 sails lift
 
+# Challenges
+
+* Retrieving existing data after login
+* Online / Offline status
+* Ability to create Channels
+* Focused more on efficiency rather than security. Only one socket listener from which data is filtered.
+
 ## Some goodies
 
 Using blueprint gives automatic REST API
@@ -35,6 +42,8 @@ curl "http://localhost:1337/channel/find?id=2"
 This also works which is more clean (Follows REST more faithfully):
 
 curl -d '{"name":"channel3"}' -H "Content-Type: application/json" -X POST http://localhost:1337/channel/create
+
+curl -H "Content-Type: application/json" http://localhost:1337/channel
 
 Example of adding Message:
 

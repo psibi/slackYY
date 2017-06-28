@@ -29,10 +29,13 @@ class MessageListings extends Component {
   componentDidMount = () => {
     console.log('nope');
     this.props.dispatch(fetchChannel());
-    
-    io.socket.get('/say/hello', function gotResponse(data, jwRes) {
-      console.log('Server responded with status code ' + jwRes.statusCode + ' and data: ', data);
+
+    io.socket.on('chatBroadcast', function gotResponse(data) {
+      console.log('got data', data);
     });
+    /* io.socket.get('/say/hello', function gotResponse(data, jwRes) {
+     *   console.log('Server responded with status code ' + jwRes.statusCode + ' and data: ', data);
+     * });*/
   }
   
   createNewChannel = () => {
@@ -40,6 +43,10 @@ class MessageListings extends Component {
     this.setState({ 
       channelName: '', 
       showModal: false,
+    });
+
+    io.socket.get('/say/hello', {channelName: this.state.channelName},  function gotResponse(data, jwRes) {
+      console.log('Server responded with status code ' + jwRes.statusCode + ' and data: ', data);
     });
   }
   
@@ -86,12 +93,6 @@ class MessageListings extends Component {
             </Modal.Actions>
           </Modal>
         </div>
-        {/* <div className="listings_direct-messages">
-            <h2 className="listings_header">Direct Messages</h2>
-            <ul className="channel_list">
-            <li className="channel"><a className="channel_name"><span className="unread">20</span><span><span className="prefix"> </span>kryton</span></a></li>
-            </ul>
-            </div> */}
       </div>
     )
   }

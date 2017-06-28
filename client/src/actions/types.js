@@ -1,1 +1,3 @@
 export const RECEIVE_CHANNEL = 'RECEIVE_CHANNEL';
+
+export const UPDATE_CHANNEL = 'UPDATE_CHANNEL';

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 const { io } = window;
 
-export class ChatFooter extends Component {
+class ChatFooter extends Component {
 
   constructor(props) {
     super(props);
@@ -17,12 +18,12 @@ export class ChatFooter extends Component {
   
   handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      console.log('sending');
+      console.log('sending', this.props);
       io.socket.get('/chat/channel/message', 
                     {
-                      channelId: 1, 
+                      channelId: this.props.currentChannelId, 
                       msg: this.state.msg, 
-                      channelName: 'dump'
+                      channelName: this.props.currentChannel,
                     });
     }
   }
@@ -52,4 +53,9 @@ export class ChatFooter extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  currentChannelId: state.meta.currentChannelId,
+  currentChannel: state.meta.currentChannel,
+});
 
+export default connect(mapStateToProps)(ChatFooter);

@@ -3,7 +3,7 @@ import { Button, Header, Icon, Modal, Input } from 'semantic-ui-react'
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import Channel from './Channel';
-import { fetchChannel } from '../../actions/channel';
+import { fetchChannel, createChannel } from '../../actions/channel';
 
 const { io } = window;
 
@@ -13,6 +13,7 @@ class MessageListings extends Component {
     super(props);
     this.state = {
       showModal: false,
+      channelName: '',
     };
   }
 
@@ -32,6 +33,18 @@ class MessageListings extends Component {
     io.socket.get('/say/hello', function gotResponse(data, jwRes) {
       console.log('Server responded with status code ' + jwRes.statusCode + ' and data: ', data);
     });
+  }
+  
+  createNewChannel = () => {
+    this.props.dispatch(createChannel(this.state.channelName));
+    this.setState({ 
+      channelName: '', 
+      showModal: false,
+    });
+  }
+  
+  onStaticChange = (e) => {
+    this.setState({ channelName: e.target.value });
   }
   
   render = () => {
@@ -58,14 +71,17 @@ class MessageListings extends Component {
             <Header icon='archive' content='Archive Old Messages' />
             <Modal.Content>
               <p>Channel name</p>
-              <Input focus placeholder="Channel nam..." />
+              <Input 
+                focus 
+                onChange={this.onStaticChange}
+                value={this.state.channelName}
+                placeholder="Channel name..." />
             </Modal.Content>
             <Modal.Actions>
-              <Button basic color='red' inverted>
-                <Icon name='remove' /> No
-              </Button>
-              <Button color='green' inverted>
-                <Icon name='checkmark' /> Yes
+              <Button 
+                onClick={this.createNewChannel}
+                color='green' inverted>
+                <Icon name='checkmark' /> Create
               </Button>
             </Modal.Actions>
           </Modal>

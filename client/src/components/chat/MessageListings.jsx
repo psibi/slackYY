@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import Channel from './Channel';
 import { fetchChannel, createChannel } from '../../actions/channel';
+import { updateCurrentChannel } from '../../actions/meta';
+import { fetchMessage } from '../../actions/message';
 
 const { io } = window;
 
@@ -29,13 +31,19 @@ class MessageListings extends Component {
   componentDidMount = () => {
     console.log('nope');
     this.props.dispatch(fetchChannel());
-
     io.socket.on('chatBroadcast', function gotResponse(data) {
       console.log('got data', data);
     });
     /* io.socket.get('/say/hello', function gotResponse(data, jwRes) {
      *   console.log('Server responded with status code ' + jwRes.statusCode + ' and data: ', data);
      * });*/
+  }
+  
+  componentWillReceiveProps = (nextProps) => {
+    if (nextProps.currentChannelId !== this.props.currentChannelId) {
+      console.log('not equal');
+    }
+    console.log('equal');
   }
   
   createNewChannel = () => {
@@ -59,6 +67,12 @@ class MessageListings extends Component {
   onStaticChange = (e) => {
     this.setState({ channelName: e.target.value });
   }
+
+  onChannelClick = channel => (e) => {
+    const { name, id } = channel;
+    this.props.dispatch(updateCurrentChannel(name, id));
+    console.log('channel id', channel);
+  }
   
   render = () => {
     return (
@@ -70,7 +84,7 @@ class MessageListings extends Component {
             {
               _.map(this.props.channelInfo, (elem) => {
                 return (
-                  <li className="channel active" key={elem.id}>
+                  <li className="channel active" key={elem.id} onClick={this.onChannelClick(elem)}>
                     <Channel name={elem.name} unread={0} />
                   </li>
                 );
@@ -106,6 +120,7 @@ class MessageListings extends Component {
 
 const mapStateToProps = state => ({
   channelInfo: state.channel.channelInfo,
+  currentChannelId: state.meta.currentChannelId,
 });
 
 export default connect(mapStateToProps)(MessageListings);

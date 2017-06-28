@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { createMessage } from '../../actions/message';
 
 const { io } = window;
 
@@ -17,14 +18,18 @@ class ChatFooter extends Component {
   }
   
   handleKeyPress = (e) => {
+    const { msg } = this.state;
+    const { currentChannelId, currentChannel } = this.props;
     if (e.key === 'Enter') {
       console.log('sending', this.props);
       io.socket.get('/chat/channel/message', 
                     {
-                      channelId: this.props.currentChannelId, 
-                      msg: this.state.msg, 
-                      channelName: this.props.currentChannel,
+                      channelId: currentChannelId, 
+                      msg: msg, 
+                      channelName: currentChannel,
                     });
+      this.props.dispatch(createMessage(msg, currentChannelId));
+      this.setState({msg: ''});
     }
   }
 

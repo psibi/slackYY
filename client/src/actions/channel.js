@@ -14,6 +14,10 @@ export function fetchChannel() {
       .then(response => response.json())
       .then((json) => {
         dispatch(receiveChannel(json));
+        if (json.length >= 1) {
+          const firstChannel = json[0];
+          dispatch(updateCurrentChannel(firstChannel.name, firstChannel.id));
+        }
       })
       .catch(() => {
         dispatch(receiveChannel([]));

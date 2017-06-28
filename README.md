@@ -26,6 +26,7 @@ sails lift
 * Online / Offline status
 * Ability to create Channels
 * Focused more on efficiency rather than security. Only one socket listener from which data is filtered.
+* Efficiency: Channel messages or cached
 
 ## Some goodies
 

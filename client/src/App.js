@@ -7,7 +7,7 @@ import {
   applyMiddleware,
 } from 'redux';
 import { ChatHeader } from './components/chat/ChatHeader';
-import { ChatFooter } from './components/chat/ChatFooter';
+import ChatFooter from './components/chat/ChatFooter';
 import MessageListings from './components/chat/MessageListings';
 import { MessageHistory } from './components/chat/MessageHistory';
 import rootReducer from './reducer';

@@ -10,6 +10,9 @@ import { ChatHeader } from './components/chat/ChatHeader';
 import ChatFooter from './components/chat/ChatFooter';
 import MessageListings from './components/chat/MessageListings';
 import MessageHistory from './components/chat/MessageHistory';
+import { Navbar } from './components/chat/Navbar';
+import Menu from './components/chat/Menu';
+import Chat from './components/chat/Chat';
 import rootReducer from './reducer';
 
 let middleWare = [thunkMiddleware];
@@ -21,23 +24,29 @@ const store = createStore(
   applyMiddleware(...middleWare),
 );
 
-
-
 class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <div>
-          <ChatHeader />
-          <div className="main">
-            <MessageListings />
-            <MessageHistory />
-          </div>
-          <ChatFooter />
-        </div>
+        <section>
+          <Navbar />
+          <Menu />
+          <Chat />
+        </section>
       </Provider>
     );
   }
 }
+
+/* <Provider store={store}>
+ * <div>
+ * <ChatHeader />
+ * <div className="main">
+ * <MessageListings />
+ * <MessageHistory />
+ * </div>
+ * <ChatFooter />
+ * </div>
+ * </Provider>*/
 
 export default App;

@@ -23,6 +23,7 @@ export default class ChatLogin extends Component {
   
   handleSubmit = (e) => {
     e.preventDefault();
+    console.log('before submit');
     const { email, password } = {...this.state};
     const requestData = { 
       email,
@@ -31,24 +32,26 @@ export default class ChatLogin extends Component {
     fetch('/login', {
       method: 'POST',
       body: JSON.stringify(requestData),
+      credentials: 'include',
     })
       .then(checkStatus)
       .then(response => response.json())
       .then((json) => {
+        console.log('nop', json);
         if (json.user === false) {
           this.setState({
             open: true,
             snackMessage: json.message
           });
+          return;
         }
-        console.log('resp', json);
+        window.location = "/chat";
       })
-      .catch((error) => {
+      .catch(() => {
         this.setState({
           open: true,
-          snackMessage: error.msg
+          snackMessage: 'Login failed'
         });
-        console.log('error', error);
       });
   }
   
@@ -71,13 +74,14 @@ export default class ChatLogin extends Component {
     return (
       <div className="card">
         <h4 className="l-login">Login</h4>
-        <form className="col-md-12" id="sign_in" onSubmit={this.handleSubmit}>
+        <form className="col-md-12" id="sign_in" onSubmit={this.handleSubmit} action="/login" method="POST">
           <div className="form-group form-float">
             <div className={classNames('form-line', {focused: !_.isEmpty(this.state.email)})}>
               <input 
                 type="email" 
                 onClick={this.onStaticFocus('email')}
                 onChange={this.onStaticChange('email')}
+                value={this.state.email}
                 ref={(input) => { this.textEmail = input; }}
                 className="form-control" value={this.state.email}/>
               <label 
@@ -92,6 +96,7 @@ export default class ChatLogin extends Component {
                 onClick={this.onStaticFocus('password')}
                 onChange={this.onStaticChange('password')}
                 ref={(input) => { this.textPassword = input; }}
+                value={this.state.password}
                 className="form-control" value={this.state.password}/>
               <label 
                 onClick={this.onStaticFocus('password')}

@@ -25,12 +25,10 @@ module.exports = {
         });
       }
       req.logIn(user, function(err) {
-        if (err) res.send(err);
-        /* return res.send({
-         *   message: info.message,
-         *   user: user
-         * });*/
-        return res.redirect('/chat');
+        return res.send({
+          message: info.message,
+          user: user
+        });
       });
 
     })(req, res);

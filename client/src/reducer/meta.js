@@ -1,10 +1,12 @@
 import { 
   UPDATE_CURRENT_CHANNEL,
+  UPDATE_USER_INFO,
 } from '../actions/types';
 
 const initialChannelState = {
   currentChannel: null,
   currentChannelId: null,
+  currentUser: {},
 };
 
 function meta(state = initialChannelState, action) {
@@ -14,6 +16,11 @@ function meta(state = initialChannelState, action) {
         ...state,
         currentChannel: action.currentChannel,
         currentChannelId: action.currentChannelId,
+      };
+    case UPDATE_USER_INFO: 
+      return {
+        ...state,
+        currentUser: action.user
       };
     default:
       return state;

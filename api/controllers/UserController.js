@@ -8,7 +8,7 @@
 module.exports = {
   currentUser: function(req, res) {
     console.log('user', req.user);
-    res.json({user: req.user});
+    return res.json({user: req.user});
   }
 };
 

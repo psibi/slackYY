@@ -46,7 +46,7 @@ export default class ChatSignup extends Component {
       .then(checkStatus)
       .then(response => response.json())
       .then((json) => {
-        window.location = "/chat";
+        window.location = "/login";
       })
       .catch((error) => {
         this.setState({

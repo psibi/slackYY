@@ -68,7 +68,7 @@ class Chat extends Component {
                     _.map(messageData[currentChannelId], 
                           (elem, index) => {
                             return (
-                              <Message2
+                              <Message
                                 userName={elem.userName} 
                                 createdAt={elem.createdAt} 
                                 msg={elem.msg} 

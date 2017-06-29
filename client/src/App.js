@@ -21,6 +21,8 @@ const store = createStore(
   applyMiddleware(...middleWare),
 );
 
+
+
 class App extends Component {
   render() {
     return (

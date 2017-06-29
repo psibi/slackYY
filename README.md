@@ -7,8 +7,8 @@ using [Sails](http://sailsjs.org) framework for Node.js.
 
 ## Pre-requisites
 
-1. Latest [LTS Node.js](https://nodejs.org/en/) (I recommend something
-   like [nvm](https://github.com/creationix/nvm) for installing it.)
+1. Latest [LTS Node.js](https://nodejs.org/en/) (I recommend
+   using [nvm](https://github.com/creationix/nvm) for installing it.)
 2. [Yarn](https://yarnpkg.com/en/docs/install)
 3. [PostgreSQL Server](https://www.postgresql.org/)
 
@@ -32,13 +32,13 @@ Jun 29 20:35:01 jane systemd[1]: Started PostgreSQL RDBMS.
 ```
 
 Also you need to have a database named `slacky` present which should
-be accessible by a user named `postgres` with password `postgres`. In case you need to change any of the following, please [edit this file](todo).
+be accessible by a user named `postgres` with password `postgres`. In case you need to change any of the following, please [edit this file](https://github.com/psibi/slackYY/blob/839daa339360e43ffe99c83ce1e1c42d55e083df/config/connections.js#L77).
 
 ## Installation instructions
 
-1. git clone git@github.com:psibi/slackYY.git
+1. `git clone git@github.com:psibi/slackYY.git`
 
-2. yarn global add sails
+2. `yarn global add sails`
 
 3. cd salts/clients
 

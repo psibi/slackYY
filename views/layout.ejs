@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%=typeof title == 'undefined' ? 'New Sails App' : title%></title>
+    <title><%=typeof title == 'undefined' ? 'Slackyy' : title%></title>
 
     <!-- Viewport mobile tag for sensible mobile support -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>:: Slackyy ::</title>
+    <!-- Favicon-->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- Custom Css -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
     <!--
         Stylesheets and Preprocessors
         ==============================
@@ -29,12 +35,11 @@
     -->
 
     <!--STYLES-->
-    <link rel="stylesheet" href="/styles/importer.css">
-    <link rel="stylesheet" href="/styles/index.css">
+    <link rel="stylesheet" href="/styles/login.css">
+    <link rel="stylesheet" href="/styles/main.css">
     <!--STYLES END-->
   </head>
 
-  <body>
     <%- body %>
 
 
@@ -87,9 +92,4 @@
           + Use a different preprocessor, like TypeScript
 
     -->
-
-    <!--SCRIPTS-->
-    <script src="/js/dependencies/sails.io.js"></script>
-    <!--SCRIPTS END-->
-  </body>
 </html>

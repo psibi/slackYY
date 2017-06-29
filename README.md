@@ -109,10 +109,3 @@ curl -d '{"msg":"dummy msg", "userName": "sibi", "channel": 1}' -H "Content-Type
 
 curl -d '{"email":"sibi@psibi.in","password":"sibi"}' -H "Content-Type: application/json" -X POST http://localhost:1337/login
 
-todo:
-=> add ur links in home page
-=> create channel dialog
-=> search input tag
-=> remove old ui react code
-=> video
-=> fix font errors

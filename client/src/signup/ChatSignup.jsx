@@ -24,7 +24,6 @@ export default class ChatSignup extends Component {
   }
   
   handleSubmit = (e) => {
-    console.log('inside handle submit');
     e.preventDefault();
     const { name, email, password, confirmPassword } = {...this.state};
     if (password !== confirmPassword) {

@@ -48,7 +48,7 @@ export function joinChannels(channels) {
   return () => {
     _.map(channels, (channel) => {
       io.socket.get('/chat/channel/join', {channelName: channel.name},  function gotResponse(data, jwRes) {
-        console.log('Server responded inside action ' + jwRes.statusCode + ' and data: ', data);
+        /* console.log('Server responded inside action ' + jwRes.statusCode + ' and data: ', data);*/
       });
     });
   }

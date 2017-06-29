@@ -4,7 +4,7 @@ import _ from 'lodash';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
 import Divider from 'material-ui/Divider';
-import Message2 from './Message2';
+import Message from './Message';
 import { fetchMessage } from '../../actions/message';
 import { createMessage } from '../../actions/message';
 
@@ -42,7 +42,6 @@ class Chat extends Component {
   }
 
   onStaticChange = field => (e) => {
-    console.log('field', e.target.value);
     this.setState({ [field]: e.target.value });
   }
   

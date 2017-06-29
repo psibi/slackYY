@@ -23,7 +23,6 @@ export default class ChatLogin extends Component {
   
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log('before submit');
     const { email, password } = {...this.state};
     const requestData = { 
       email,
@@ -37,7 +36,6 @@ export default class ChatLogin extends Component {
       .then(checkStatus)
       .then(response => response.json())
       .then((json) => {
-        console.log('nop', json);
         if (json.user === false) {
           this.setState({
             open: true,

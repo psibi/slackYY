@@ -1,7 +1,7 @@
 /**
  * Message.js
  *
- * @description :: TODO: You might write a short summary of how this model works and what it represents here.
+ * @description :: Message model used in Chat appplication
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 

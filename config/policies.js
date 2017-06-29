@@ -28,12 +28,8 @@ module.exports.policies = {
 
   '*': true,
 
-  'PostController': {
-    '*': 'isAuthenticated'
-  },
-  
   'ChatController': {
-    '*': 'isAuthenticated'
+    'view': 'isAuthenticated'
   },
   
   /***************************************************************************

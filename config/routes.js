@@ -33,7 +33,7 @@ module.exports.routes = {
    ***************************************************************************/
 
   '/': {
-    view: 'homepage'
+    view: 'login'
   },
 
   /***************************************************************************
@@ -58,15 +58,11 @@ module.exports.routes = {
     view: 'signup'
   },
 
-  'GET /chat': {
-    view: 'chat'
-  },
+  'GET /chat': 'ChatController.view',
 
-  'GET /chat1': 'ChatController.view',
+  'GET /chat/channel/join': 'ChatController.join',
   
-  'GET /chat/channel/join': 'HelloController.hello',
-  
-  'GET /chat/channel/message': 'HelloController.sendMessage',
+  'GET /chat/channel/message': 'ChatController.sendMessage',
   
   'GET /currentUser': 'UserController.currentUser'
 

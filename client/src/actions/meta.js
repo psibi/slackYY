@@ -23,7 +23,10 @@ export function updateUserInfo(user) {
 
 export function fetchUser() {
   return (dispatch) => {
-    return fetch(`/currentUser`)
+    return fetch(`/currentUser`, {
+      method: 'GET',
+      credentials: 'include',
+    })
       .then(checkStatus)
       .then(response => response.json())
       .then((json) => {

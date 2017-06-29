@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import classNames from 'classnames';
+import Snackbar from 'material-ui/Snackbar';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { checkStatus } from '../helpers/utils';
 
 export default class ChatLogin extends Component {
@@ -9,7 +11,9 @@ export default class ChatLogin extends Component {
     super(props);
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      open: false,
+      snackMessage: ''
     };
   }
 
@@ -31,9 +35,19 @@ export default class ChatLogin extends Component {
       .then(checkStatus)
       .then(response => response.json())
       .then((json) => {
+        if (json.user === false) {
+          this.setState({
+            open: true,
+            snackMessage: json.message
+          });
+        }
         console.log('resp', json);
       })
       .catch((error) => {
+        this.setState({
+          open: true,
+          snackMessage: error.msg
+        });
         console.log('error', error);
       });
   }
@@ -46,6 +60,12 @@ export default class ChatLogin extends Component {
       this.textPassword.focus();
     }
   }
+  
+  handleRequestClose = () => {
+    this.setState({
+      open: false,
+    });
+  };
 
   render = () => {
     return (
@@ -78,9 +98,17 @@ export default class ChatLogin extends Component {
                 className="form-label">Password</label>
             </div>
           </div>
-          <a href="/login" className="btn btn-raised waves-effect bg-red" type="submit">SIGN IN</a> 
-          <a href="/signup" className="btn btn-raised waves-effect" type="submit">SIGN UP</a>
+          <a href="#signin" onClick={this.handleSubmit} className="btn btn-raised waves-effect bg-red" type="submit">SIGN IN</a> 
+          <a href="/signup" className="btn btn-raised waves-effect">SIGN UP</a>
         </form>
+        <MuiThemeProvider>
+          <Snackbar
+            open={this.state.open}
+            message={this.state.snackMessage}
+            autoHideDuration={4000}
+            onRequestClose={this.handleRequestClose}
+          />
+        </MuiThemeProvider>
       </div>
     );
   }

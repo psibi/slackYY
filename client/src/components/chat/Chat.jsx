@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import TextField from 'material-ui/TextField';
+import Divider from 'material-ui/Divider';
 import Message2 from './Message2';
 import { fetchMessage } from '../../actions/message';
 import { createMessage } from '../../actions/message';
@@ -33,14 +36,6 @@ class Chat extends Component {
     const { msg } = this.state;
     const { currentChannelId, currentChannel } = this.props;
     if (e.key === 'Enter') {
-      console.log('sending', this.props);
-      /* io.socket.get('/chat/channel/message', 
-       *               {
-       *                 channelId: currentChannelId, 
-       *                 msg: msg, 
-       *                 channelName: currentChannel,
-       *               });*/
-      
       this.props.dispatch(createMessage(msg, currentChannelId, currentChannel, this.props.user));
       this.setState({msg: ''});
     }
@@ -54,9 +49,6 @@ class Chat extends Component {
   render = () => {
     
     const { currentChannelId, messageData } = this.props;
-    console.log('jas', currentChannelId, messageData);
-    if (_.isNull(currentChannelId))
-      return (<p>hello </p>);
 
     return (
       <section className="content chat-app">
@@ -72,6 +64,8 @@ class Chat extends Component {
               <div className="chat-history">
                 <ul>
                   {
+                    _.isNull(currentChannelId) ?
+                    null :
                     _.map(messageData[currentChannelId], 
                           (elem, index) => {
                             return (
@@ -87,12 +81,17 @@ class Chat extends Component {
                 </ul>
               </div>
               <div className="chat-footer">
-                <input 
-                  value={this.state.msg}
-                  onChange={this.onStaticChange('msg')}
-                  onKeyPress={this.handleKeyPress}
-                  type="text" 
-                  className="chatInput" />
+                <MuiThemeProvider>
+                  <TextField 
+                    value={this.state.msg}
+                    onChange={this.onStaticChange('msg')}
+                    onKeyPress={this.handleKeyPress}
+                    className="chatInput"
+                    fullWidth={true}
+                    multiLine={true}
+                    autoFocus
+                    hintText="Your thoughts..." />
+                </MuiThemeProvider>
               </div>
             </div>
           </div>

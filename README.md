@@ -83,6 +83,8 @@ Grunt tasks and their configuration
 Contains different files which can be used for configuring database
 connection, routes, policies etc.
 
+# Appendix (Dev notes while learning)
+
 ## Some goodies
 
 Using blueprint gives automatic REST API

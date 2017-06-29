@@ -56,7 +56,8 @@ module.exports = {
   // In production, we only want to load the polyfills and the app code.
   entry: {
     'chat': './src/index.js',
-    'signin': './src/login/index.js'
+    'signin': './src/login/index.js',
+    'signup': './src/signup/index.js'
   },
   output: {
     // The build folder.

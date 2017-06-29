@@ -34,7 +34,8 @@ module.exports = {
   // The first two entry points enable "hot" CSS and auto-refreshes for JS.
   entry: {
     'chat': './src/index.js',
-    'signin': './src/login/index.js'
+    'signin': './src/login/index.js',
+    'signup': './src/signup/index.js'
   },
   output: {
     // Next line is not used in dev but WebpackDevServer crashes without it:

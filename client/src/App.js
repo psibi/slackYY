@@ -6,10 +6,6 @@ import {
   createStore,
   applyMiddleware,
 } from 'redux';
-import { ChatHeader } from './components/chat/ChatHeader';
-import ChatFooter from './components/chat/ChatFooter';
-import MessageListings from './components/chat/MessageListings';
-import MessageHistory from './components/chat/MessageHistory';
 import { Navbar } from './components/chat/Navbar';
 import Menu from './components/chat/Menu';
 import Chat from './components/chat/Chat';
@@ -37,16 +33,5 @@ class App extends Component {
     );
   }
 }
-
-/* <Provider store={store}>
- * <div>
- * <ChatHeader />
- * <div className="main">
- * <MessageListings />
- * <MessageHistory />
- * </div>
- * <ChatFooter />
- * </div>
- * </Provider>*/
 
 export default App;

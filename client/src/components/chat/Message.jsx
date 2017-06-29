@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import classNames from 'classnames';
 
-export default function Message2(props) {
+export default function Message(props) {
   return (
     <li className={classNames({clearfix: props.arrayIndex % 2 === 0})}>
       <div className="message-data text-right"> 

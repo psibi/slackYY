@@ -33799,7 +33799,8 @@ fieldset[disabled] .form-control {
 
 .chat {
     float: left;
-    color: #434651
+    color: #434651;
+    width: 100%;
 }
 
 .chat .chat-footer {

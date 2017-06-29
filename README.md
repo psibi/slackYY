@@ -40,27 +40,46 @@ be accessible by a user named `postgres` with password `postgres`. In case you n
 
 2. `yarn global add sails`
 
-3. cd salts/clients
+3. `cd salts/clients`
 
-4. yarn install
+4. `yarn install`
 
-5. yarn run build
+5. `yarn run build`
 
-6. cd ..
+6. `cd ..`
 
-7. yarn install
+7. `yarn install`
 
-8. sails lift
+8. `sails lift`
 
 Go and visit `http://localhost:1337` to see the application!
 
-# Challenges
+# App Organization
 
-* Retrieving existing data after login
-* Online / Offline status
-* Ability to create Channels
-* Focused more on efficiency rather than security. Only one socket listener from which data is filtered.
-* Efficiency: Channel messages or cached
+These are the important directories you will find:
+
+* views 
+
+Holds the presentaion layer of the code. We
+use [EJS](https://github.com/tj/ejs) for embedding templates.
+
+* client
+
+Contains the front-end client code which uses `React` and `Redux`.
+
+* api
+
+Contains the backbonse of the entire application. The server side code
+lies here. Models, controllers and Policies are defined here.
+
+* tasks
+
+Grunt tasks and their configuration
+
+* config
+
+Contains different files which can be used for configuring database
+connection, routes, policies etc.
 
 ## Some goodies
 

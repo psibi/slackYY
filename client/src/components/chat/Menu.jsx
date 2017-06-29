@@ -22,10 +22,6 @@ class Menu extends Component {
     };
   }
   
-  componentDidMount = () => {
-    this.props.dispatch(fetchUser());
-  }
-  
   handleClose = () => {
     this.setState({open: false});
   };
@@ -37,6 +33,7 @@ class Menu extends Component {
   componentDidMount = () => {
     const { dispatch } = this.props;
     this.props.dispatch(fetchChannel());
+    this.props.dispatch(fetchUser());
     io.socket.on('chatBroadcast', function gotResponse(data) {
       dispatch(receivedChatMessage(data));
       console.log('got data', data);

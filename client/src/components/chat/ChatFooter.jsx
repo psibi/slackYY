@@ -29,7 +29,7 @@ class ChatFooter extends Component {
        *                 channelName: currentChannel,
        *               });*/
     
-      this.props.dispatch(createMessage(msg, currentChannelId, currentChannel));
+      this.props.dispatch(createMessage(msg, currentChannelId, currentChannel, this.props.user));
       this.setState({msg: ''});
     }
   }
@@ -49,9 +49,9 @@ class ChatFooter extends Component {
         </div>
         <div className="input-box">
           <input 
-          value={this.state.msg}
-          onChange={this.onStaticChange}
-          onKeyPress={this.handleKeyPress}
+            value={this.state.msg}
+            onChange={this.onStaticChange}
+            onKeyPress={this.handleKeyPress}
             className="input-box_text" type="text"/>
         </div>
       </div>
@@ -62,6 +62,7 @@ class ChatFooter extends Component {
 const mapStateToProps = state => ({
   currentChannelId: state.meta.currentChannelId,
   currentChannel: state.meta.currentChannel,
+  user: state.meta.currentUser,
 });
 
 export default connect(mapStateToProps)(ChatFooter);

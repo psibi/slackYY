@@ -23,14 +23,14 @@ export function fetchMessage(channelId) {
   };
 }
 
-export function createMessage(msg, channelId, channelName) {
+export function createMessage(msg, channelId, channelName, user) {
   return (dispatch) => {
     return fetch('/message/create', {
       method: 'POST',
       body: JSON.stringify(
         {
           msg: msg, 
-          userName: 'Chika',
+          userName: user.name,
           channel: channelId,
         }),
     })

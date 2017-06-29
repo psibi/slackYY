@@ -130,9 +130,6 @@ class Menu extends Component {
                     );
                   })
                 }
-              <li> <a href="javascript:void(0);"><i className="material-icons">donut_small</i><span>Channel 1</span> </a> </li>
-              <li> <a href="javascript:void(0);"><i className="material-icons">donut_small</i><span>Channel 2</span> </a> </li>
-              <li> <a href="javascript:void(0);"><i className="material-icons">donut_small</i><span>Channel 3</span> </a> </li>
             </ul>
           </div>
         </aside>

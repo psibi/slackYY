@@ -36,7 +36,6 @@ class Menu extends Component {
     this.props.dispatch(fetchUser());
     io.socket.on('chatBroadcast', function gotResponse(data) {
       dispatch(receivedChatMessage(data));
-      console.log('got data', data);
     });
   }
 
@@ -49,10 +48,8 @@ class Menu extends Component {
   }
 
   createNewChannel = () => {
-    console.log('inside createNewChannel');
     this.props.dispatch(createChannel(this.state.channelName));
     io.socket.get('/chat/channel/join', {channelName: this.state.channelName},  function gotResponse(data, jwRes) {
-      console.log('Server responded with status code ' + jwRes.statusCode + ' and data: ', data);
     });
     this.setState({ 
       channelName: '', 
@@ -61,14 +58,12 @@ class Menu extends Component {
   }
   
   onStaticChange = field => (e) => {
-    console.log('field', e.target.value);
     this.setState({ [field]: e.target.value });
   }
 
   onChannelClick = channel => (e) => {
     const { name, id } = channel;
     this.props.dispatch(updateCurrentChannel(name, id));
-    console.log('channel id', channel);
   }
   
   render = () => {
@@ -138,7 +133,6 @@ class Menu extends Component {
             open={this.state.open}
             onRequestClose={this.handleClose}
           >
-            Enter Channel name
             <TextField 
               value={this.state.channelName}
               onChange={this.onStaticChange('channelName')}

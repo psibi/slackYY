@@ -1,24 +1,58 @@
-# slackyy
+# slackYY
 
-a [Sails](http://sailsjs.org) application
+Yet another slack like application. Built
+using [Sails](http://sailsjs.org) framework for Node.js.
 
-# Run
+# How to run ?
 
-Need to have postgres DB with a database name slacky.
+## Pre-requisites
 
-yarn global add sails
+1. Latest [LTS Node.js](https://nodejs.org/en/) (I recommend something
+   like [nvm](https://github.com/creationix/nvm) for installing it.)
+2. [Yarn](https://yarnpkg.com/en/docs/install)
+3. [PostgreSQL Server](https://www.postgresql.org/)
 
-yarn install
+Note that `postgresql` server should be running up. To see if it's
+running on a Linux machine, you have to do:
 
-cd clients
+``` shellsession
+$ systemctl status postgresql
+● postgresql.service - PostgreSQL RDBMS
+   Loaded: loaded (/lib/systemd/system/postgresql.service; enabled; vendor preset: enabled)
+   Active: active (exited) since Thu 2017-06-29 20:35:01 IST; 3h 36min ago
+  Process: 1138 ExecStart=/bin/true (code=exited, status=0/SUCCESS)
+ Main PID: 1138 (code=exited, status=0/SUCCESS)
+    Tasks: 0
+   Memory: 0B
+      CPU: 0
+   CGroup: /system.slice/postgresql.service
 
-yarn install
+Jun 29 20:35:01 jane systemd[1]: Starting PostgreSQL RDBMS...
+Jun 29 20:35:01 jane systemd[1]: Started PostgreSQL RDBMS.
+```
 
-yarn run build
+Also you need to have a database named `slacky` present which should
+be accessible by a user named `postgres` with password `postgres`. In case you need to change any of the following, please [edit this file](todo).
 
-cd ..
+## Installation instructions
 
-sails lift
+1. git clone git@github.com:psibi/slackYY.git
+
+2. yarn global add sails
+
+3. cd salts/clients
+
+4. yarn install
+
+5. yarn run build
+
+6. cd ..
+
+7. yarn install
+
+8. sails lift
+
+Go and visit `http://localhost:1337` to see the application!
 
 # Challenges
 
@@ -56,3 +90,6 @@ todo:
 => add ur links in home page
 => create channel dialog
 => search input tag
+=> remove old ui react code
+=> video
+=> fix font errors

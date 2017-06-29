@@ -49,3 +49,5 @@ curl -H "Content-Type: application/json" http://localhost:1337/channel
 Example of adding Message:
 
 curl -d '{"msg":"dummy msg", "userName": "sibi", "channel": 1}' -H "Content-Type: application/json" -X POST http://localhost:1337/message/create
+
+curl -d '{"email":"sibi@psibi.in","password":"sibi"}' -H "Content-Type: application/json" -X POST http://localhost:1337/login

@@ -16,8 +16,10 @@ You can view the demo of the app in Youtube:
   socket.io. Sails.js wraps on top of this library and gives a nice
   API for consumption. Socket.io actually has two parts: a client side
   which runs in browser and a server side library for `Node.js`.
-* Postgres: We use Postgres as RDBMS backend for storing user, channel
+* [PostgreSQL Server](https://www.postgresql.org/): We use Postgres as RDBMS backend for storing user, channel
   and the chat messages for later retrieval purpose.
+* React/Redux: The frontend application is built using React and
+  Redux. The folder `client` contains all the frontend related code.
 
 # How to run ?
 

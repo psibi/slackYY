@@ -9,6 +9,7 @@
     "lodash": "^4.17.4",
     "material-ui": "^0.18.5",
     "moment": "^2.18.1",
+    "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.5",

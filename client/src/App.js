@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
@@ -6,7 +6,7 @@ import {
   createStore,
   applyMiddleware,
 } from 'redux';
-import { Navbar } from './components/chat/Navbar';
+import Navbar from './components/chat/Navbar';
 import Menu from './components/chat/Menu';
 import Chat from './components/chat/Chat';
 import rootReducer from './reducer';
@@ -20,18 +20,14 @@ const store = createStore(
   applyMiddleware(...middleWare),
 );
 
-class App extends Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <section>
-          <Navbar />
-          <Menu />
-          <Chat />
-        </section>
-      </Provider>
-    );
-  }
+export default function App() {
+  return (
+    <Provider store={store}>
+      <section>
+        <Navbar />
+        <Menu />
+        <Chat />
+      </section>
+    </Provider>
+  );
 }
-
-export default App;

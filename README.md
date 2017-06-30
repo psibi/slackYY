@@ -44,7 +44,7 @@ be accessible by a user named `postgres` with password `postgres`. In case you n
 
 2. `yarn global add sails`
 
-3. `cd salts/clients`
+3. `cd slackYY/client`
 
 4. `yarn install`
 

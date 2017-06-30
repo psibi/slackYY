@@ -85,6 +85,11 @@ Grunt tasks and their configuration
 Contains different files which can be used for configuring database
 connection, routes, policies etc.
 
+* test
+
+Test directory containing integration testing code for controllers and
+models related functions.
+
 # Appendix (Dev notes while learning)
 
 ## Some goodies

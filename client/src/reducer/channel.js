@@ -1,4 +1,4 @@
-import 
+import
 { RECEIVE_CHANNEL,
   UPDATE_CHANNEL,
 } from '../actions/types';

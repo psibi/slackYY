@@ -1,4 +1,4 @@
-import { 
+import {
   UPDATE_CURRENT_CHANNEL,
   UPDATE_USER_INFO,
 } from '../actions/types';
@@ -17,10 +17,10 @@ function meta(state = initialChannelState, action) {
         currentChannel: action.currentChannel,
         currentChannelId: action.currentChannelId,
       };
-    case UPDATE_USER_INFO: 
+    case UPDATE_USER_INFO:
       return {
         ...state,
-        currentUser: action.user
+        currentUser: action.user,
       };
     default:
       return state;

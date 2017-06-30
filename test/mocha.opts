@@ -1,0 +1,4 @@
+--bail
+--timeout 20s
+test/bootstrap.test.js
+test/integration/controllers/**/*.test.js

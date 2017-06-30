@@ -7,6 +7,18 @@ You can view the demo of the app in Youtube:
 
 [![SlackYY](https://i.ytimg.com/vi/_Ea2GoNJWAI/maxresdefault.jpg)](https://www.youtube.com/watch?v=_Ea2GoNJWAI&feature=youtu.be)
 
+# Architecture
+
+* [Sails.js](http://sailsjs.com) : Sails is a framework that is built on top
+  of [Express](https://github.com/expressjs). The code extensively (specifically the Blueprint
+  API) uses the features provided by Sails to achieve things.
+* [Socket.io](https://socket.io/) : For real time chat app, we internally use
+  socket.io. Sails.js wraps on top of this library and gives a nice
+  API for consumption. Socket.io actually has two parts: a client side
+  which runs in browser and a server side library for `Node.js`.
+* Postgres: We use Postgres as RDBMS backend for storing user, channel
+  and the chat messages for later retrieval purpose.
+
 # How to run ?
 
 ## Pre-requisites

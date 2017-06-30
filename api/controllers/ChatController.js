@@ -70,7 +70,7 @@ module.exports = {
     // The data returned here is what we received back on the client as `data` in:
     // `io.socket.get('/say/hello', function gotResponse(data, jwRes) { /* ... */ });`
     return res.json({
-      anyData: 'we want to send back'
+      info: 'user joined channel'
     });
   }
 };

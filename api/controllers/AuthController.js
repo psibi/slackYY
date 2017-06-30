@@ -23,14 +23,14 @@ module.exports = {
           message: info.message,
           user: user
         });
-      }
-      req.logIn(user, function(err) {
-        return res.send({
-          message: info.message,
-          user: user
+      } else {
+        req.logIn(user, function(err) {
+          return res.send({
+            message: info.message,
+            user: user
+          });
         });
-      });
-
+      }
     })(req, res);
   },
 

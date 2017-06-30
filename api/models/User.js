@@ -6,6 +6,7 @@
  */
 
 const bcrypt = require('bcrypt');
+const BCRYPT_ROUNDS = 10;
 
 module.exports = {
   tableName: 'user',
@@ -30,7 +31,7 @@ module.exports = {
     }    
   },
   beforeCreate: function(user, cb) {
-    bcrypt.genSalt(10, function(err, salt) {
+    bcrypt.genSalt(BCRYPT_ROUNDS, function(err, salt) {
       bcrypt.hash(user.password, salt, function(err, hash) {
         if (err) {
           console.log(err);

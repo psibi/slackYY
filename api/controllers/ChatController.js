@@ -24,10 +24,13 @@ module.exports = {
       msg: msg,
       sort: 'createdAt DESC'
     }).then(function(message) {
-      if (!message) return res.notFound();
-      sails.sockets.broadcast(channelName, 'chatBroadcast', message);
-      /* console.log('msg', message);*/
-      return res.json(message);
+      if (!message) {
+        return res.notFound();
+      } else {
+        sails.sockets.broadcast(channelName, 'chatBroadcast', message);
+        /* console.log('msg', message);*/
+        return res.json(message);
+      }
     });
   },
 
@@ -74,4 +77,3 @@ module.exports = {
     });
   }
 };
-

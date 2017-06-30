@@ -41,10 +41,9 @@ class Menu extends Component {
   }
 
   componentWillReceiveProps = (nextProps) => {
-    if (nextProps.currentChannelId !== this.props.currentChannelId) {
-      if (_.isUndefined(nextProps.messageData[nextProps.currentChannelId])) {
-        this.props.dispatch(fetchMessage(nextProps.currentChannelId));
-      }
+    if (nextProps.currentChannelId !== this.props.currentChannelId &&
+        _.isUndefined(nextProps.messageData[nextProps.currentChannelId])) {
+      this.props.dispatch(fetchMessage(nextProps.currentChannelId));
     }
   }
 

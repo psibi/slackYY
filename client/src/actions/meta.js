@@ -1,4 +1,4 @@
-import { 
+import {
   UPDATE_CURRENT_CHANNEL,
   UPDATE_USER_INFO,
 } from './types';
@@ -11,7 +11,7 @@ export function updateCurrentChannel(channelName, channelId) {
     type: UPDATE_CURRENT_CHANNEL,
     currentChannel: channelName,
     currentChannelId: channelId,
-  }
+  };
 }
 
 export function updateUserInfo(user) {
@@ -22,8 +22,8 @@ export function updateUserInfo(user) {
 }
 
 export function fetchUser() {
-  return (dispatch) => {
-    return fetch(`/currentUser`, {
+  return dispatch => (
+    fetch('/currentUser', {
       method: 'GET',
       credentials: 'include',
     })
@@ -34,6 +34,6 @@ export function fetchUser() {
       })
       .catch(() => {
         dispatch(updateUserInfo({}));
-      });
-  };
+      })
+  );
 }

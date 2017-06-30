@@ -1,4 +1,4 @@
-import { 
+import {
   RECEIVE_CHANNEL_MESSAGE,
   UPDATE_MESSAGE,
   RECEIVE_CHAT_MESSAGE,
@@ -9,9 +9,25 @@ import {
 
 const { io } = window;
 
+export const receiveMessage = (channelId, json) => ({
+  type: RECEIVE_CHANNEL_MESSAGE,
+  data: json,
+  channelId,
+});
+
+export const updateMessage = json => ({
+  type: UPDATE_MESSAGE,
+  data: json,
+});
+
+export const receivedChatMessage = message => ({
+  type: RECEIVE_CHAT_MESSAGE,
+  message,
+});
+
 export function fetchMessage(channelId) {
-  return (dispatch) => {
-    return fetch(`/message?channel=${channelId}`)
+  return dispatch =>
+    fetch(`/message?channel=${channelId}`)
       .then(checkStatus)
       .then(response => response.json())
       .then((json) => {
@@ -20,16 +36,16 @@ export function fetchMessage(channelId) {
       .catch(() => {
         dispatch(receiveMessage(channelId, []));
       });
-  };
 }
 
+
 export function createMessage(msg, channelId, channelName, user) {
-  return (dispatch) => {
-    return fetch('/message/create', {
+  return dispatch =>
+    fetch('/message/create', {
       method: 'POST',
       body: JSON.stringify(
         {
-          msg: msg, 
+          msg,
           userName: user.name,
           channel: channelId,
         }),
@@ -37,29 +53,11 @@ export function createMessage(msg, channelId, channelName, user) {
       .then(checkStatus)
       .then(response => response.json())
       .then((data) => {
-        dispatch(updateMessage(data))
-        io.socket.get('/chat/channel/message', 
-                      {
-                        channelId: channelId, 
-                        msg: msg, 
-                        channelName,
-                      });
+        dispatch(updateMessage(data));
+        io.socket.get('/chat/channel/message', {
+          channelId,
+          msg,
+          channelName,
+        });
       });
-  }
 }
-
-export const receiveMessage = (channelId, json) => ({
-  type: RECEIVE_CHANNEL_MESSAGE,
-  data: json,
-  channelId,
-});
-
-export const updateMessage = (json) => ({
-  type: UPDATE_MESSAGE,
-  data: json,
-});
-
-export const receivedChatMessage = (message) => ({
-  type: RECEIVE_CHAT_MESSAGE,
-  message,
-});

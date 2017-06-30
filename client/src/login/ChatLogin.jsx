@@ -21,15 +21,6 @@ export default class ChatLogin extends Component {
     this.setState({ [field]: e.target.value });
   }
 
-  onStaticFocus = field => () => {
-    if (field === 'email') {
-      this.textEmail.focus();
-    }
-    if (field === 'password') {
-      this.textPassword.focus();
-    }
-  }
-
   handleSubmit = (e) => {
     e.preventDefault();
     const { email, password } = { ...this.state };
@@ -76,11 +67,9 @@ export default class ChatLogin extends Component {
           <div className={classNames('form-line', { focused: !_.isEmpty(this.state.email) })}>
             <input
               type="email"
-              onClick={this.onStaticFocus('email')}
               onChange={this.onStaticChange('email')}
               id="emailInput"
               value={this.state.email}
-              ref={(input) => { this.textEmail = input; }}
               className="form-control"
             />
             <label
@@ -95,9 +84,7 @@ export default class ChatLogin extends Component {
           <div className={classNames('form-line', { focused: !_.isEmpty(this.state.password) })}>
             <input
               type="password"
-              onClick={this.onStaticFocus('password')}
               onChange={this.onStaticChange('password')}
-              ref={(input) => { this.textPassword = input; }}
               value={this.state.password}
               id="passowrdInput"
               className="form-control"

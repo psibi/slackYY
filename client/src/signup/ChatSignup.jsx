@@ -73,7 +73,6 @@ export default class ChatSignup extends Component {
               type="text"
               className="form-control"
               value={this.state.name}
-              ref={(input) => { this.textName = input; }}
               onChange={this.onStaticChange('name')}
               name="name"
               id="textName"
@@ -91,7 +90,6 @@ export default class ChatSignup extends Component {
               type="email"
               className="form-control"
               value={this.state.email}
-              ref={(input) => { this.textEmail = input; }}
               onChange={this.onStaticChange('email')}
               name="email"
               id="textEmail"
@@ -108,7 +106,6 @@ export default class ChatSignup extends Component {
               type="password"
               className="form-control"
               value={this.state.password}
-              ref={(input) => { this.textPassword = input; }}
               onChange={this.onStaticChange('password')}
               name="password"
               id="textPassword"
@@ -124,7 +121,6 @@ export default class ChatSignup extends Component {
             <input
               type="password"
               value={this.state.confirmPassword}
-              ref={(input) => { this.textConfirmPassword = input; }}
               onChange={this.onStaticChange('confirmPassword')}
               className="form-control"
               id="textConfirmPassword"

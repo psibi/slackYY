@@ -1,19 +1,30 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
-import { fetchChannel, createChannel } from '../../actions/channel';
 import _ from 'lodash';
-import { fetchUser } from '../../actions/meta';
-import { updateCurrentChannel } from '../../actions/meta';
+import { fetchChannel, createChannel } from '../../actions/channel';
+import { fetchUser, updateCurrentChannel } from '../../actions/meta';
 import { fetchMessage, receivedChatMessage } from '../../actions/message';
 
 const { io } = window;
 
 class Menu extends Component {
-  
+
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    currentChannelId: PropTypes.number.isRequired,
+    messageData: PropTypes.arrayOf(PropTypes.object).isRequired,
+    currentUser: PropTypes.shape({
+      name: PropTypes.string,
+      email: PropTypes.string,
+    }).isRequired,
+    channelInfo: PropTypes.arrayOf(PropTypes.object).isRequired,
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -21,22 +32,12 @@ class Menu extends Component {
       channelName: '',
     };
   }
-  
-  handleClose = () => {
-    this.setState({open: false});
-  };
-  
-  addChannel = () => {
-    this.setState({open: true});
-  }
 
   componentDidMount = () => {
     const { dispatch } = this.props;
     this.props.dispatch(fetchChannel());
     this.props.dispatch(fetchUser());
-    io.socket.on('chatBroadcast', function gotResponse(data) {
-      dispatch(receivedChatMessage(data));
-    });
+    io.socket.on('chatBroadcast', data => dispatch(receivedChatMessage(data)));
   }
 
   componentWillReceiveProps = (nextProps) => {
@@ -44,51 +45,58 @@ class Menu extends Component {
       if (_.isUndefined(nextProps.messageData[nextProps.currentChannelId])) {
         this.props.dispatch(fetchMessage(nextProps.currentChannelId));
       }
-    }    
+    }
   }
 
-  createNewChannel = () => {
-    this.props.dispatch(createChannel(this.state.channelName));
-    io.socket.get('/chat/channel/join', {channelName: this.state.channelName},  function gotResponse(data, jwRes) {
-    });
-    this.setState({ 
-      channelName: '', 
-      open: false,
-    });
+  onChannelClick = channel => () => {
+    const { name, id } = channel;
+    this.props.dispatch(updateCurrentChannel(name, id));
   }
-  
+
   onStaticChange = field => (e) => {
     this.setState({ [field]: e.target.value });
   }
 
-  onChannelClick = channel => (e) => {
-    const { name, id } = channel;
-    this.props.dispatch(updateCurrentChannel(name, id));
+  createNewChannel = () => {
+    this.props.dispatch(createChannel(this.state.channelName));
+    io.socket.get('/chat/channel/join', { channelName: this.state.channelName });
+    this.setState({
+      channelName: '',
+      open: false,
+    });
   }
-  
+
+  addChannel = () => {
+    this.setState({ open: true });
+  }
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
   render = () => {
-    const { currentUser } = {...this.props};
+    const { currentUser } = { ...this.props };
     if (_.isEmpty(currentUser)) {
       currentUser.name = '';
       currentUser.email = '';
     }
-    
+
     const actions = [
       <FlatButton
         label="Cancel"
-        primary={true}
+        primary
         onTouchTap={this.handleClose}
         onClick={this.handleClose}
       />,
       <FlatButton
         label="Create"
-        primary={true}
-        keyboardFocused={true}
+        primary
+        keyboardFocused
         onTouchTap={this.createNewChannel}
         onClick={this.createNewChannel}
       />,
     ];
-    
+
     return (
       <section>
         <aside id="leftsidebar" className="sidebar">
@@ -102,26 +110,26 @@ class Menu extends Component {
           <div className="menu">
             <ul className="list">
               <li className="header">MAIN NAVIGATION</li>
-              <li> 
+              <li>
                 <a
                   onClick={this.addChannel}
-                  href="#channel">
-                  <i className="material-icons">pets</i><span>Add Channel</span> 
-                </a> 
+                  href="#channel"
+                >
+                  <i className="material-icons">pets</i><span>Add Channel</span>
+                </a>
               </li>
               <li className="header">Channels</li>
-                {
-                  _.map(this.props.channelInfo, (elem) => {
-                    return (
-                      <li key={elem.id} onClick={this.onChannelClick(elem)}> 
-                        <a href="javascript:void(0);">
-                          <i className="material-icons">donut_small</i>
-                          <span>{elem.name}</span> 
-                        </a> 
-                      </li>
-                    );
-                  })
-                }
+              {
+                _.map(this.props.channelInfo, elem =>
+                   (
+                     <li key={elem.id} onClick={this.onChannelClick(elem)}>
+                       <a href="#channel">
+                         <i className="material-icons">donut_small</i>
+                         <span>{elem.name}</span>
+                       </a>
+                     </li>
+                  ))
+              }
             </ul>
           </div>
         </aside>
@@ -133,10 +141,11 @@ class Menu extends Component {
             open={this.state.open}
             onRequestClose={this.handleClose}
           >
-            <TextField 
+            <TextField
               value={this.state.channelName}
               onChange={this.onStaticChange('channelName')}
-              hintText="Channel name" />
+              hintText="Channel name"
+            />
           </Dialog>
         </MuiThemeProvider>
       </section>

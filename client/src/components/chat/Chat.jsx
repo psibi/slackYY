@@ -1,17 +1,24 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
-import Divider from 'material-ui/Divider';
 import Message from './Message';
-import { fetchMessage } from '../../actions/message';
-import { createMessage } from '../../actions/message';
-
-const { io } = window;
+import { createMessage, fetchMessage } from '../../actions/message';
 
 class Chat extends Component {
-  
+
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    currentChannelId: PropTypes.number.isRequired,
+    currentChannel: PropTypes.string.isRequired,
+    messageData: PropTypes.arrayOf(PropTypes.object).isRequired,
+    user: PropTypes.shape({
+      name: PropTypes.string,
+    }).isRequired,
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -23,30 +30,29 @@ class Chat extends Component {
     const initialChannelId = 1;
     this.props.dispatch(fetchMessage(initialChannelId));
   }
-  
+
   componentWillReceiveProps = (nextProps) => {
     if (nextProps.currentChannelId !== this.props.currentChannelId) {
       if (_.isUndefined(nextProps.messageData[nextProps.currentChannelId])) {
         this.props.dispatch(fetchMessage(nextProps.currentChannelId));
       }
     }
-  }  
+  }
+
+  onStaticChange = field => (e) => {
+    this.setState({ [field]: e.target.value });
+  }
 
   handleKeyPress = (e) => {
     const { msg } = this.state;
     const { currentChannelId, currentChannel } = this.props;
     if (e.key === 'Enter') {
       this.props.dispatch(createMessage(msg, currentChannelId, currentChannel, this.props.user));
-      this.setState({msg: ''});
+      this.setState({ msg: '' });
     }
   }
 
-  onStaticChange = field => (e) => {
-    this.setState({ [field]: e.target.value });
-  }
-  
   render = () => {
-    
     const { currentChannelId, messageData } = this.props;
 
     return (
@@ -65,31 +71,30 @@ class Chat extends Component {
                   {
                     _.isNull(currentChannelId) ?
                     null :
-                    _.map(messageData[currentChannelId], 
-                          (elem, index) => {
-                            return (
-                              <Message
-                                userName={elem.userName} 
-                                createdAt={elem.createdAt} 
-                                msg={elem.msg} 
-                                arrayIndex={index}
-                              />
-                            );
-                          })
+                    _.map(messageData[currentChannelId],
+                          elem => (
+                            <Message
+                              userName={elem.userName}
+                              createdAt={elem.createdAt}
+                              msg={elem.msg}
+                              currentUserName={this.props.user.name}
+                            />
+                          ))
                   }
                 </ul>
               </div>
               <div className="chat-footer">
                 <MuiThemeProvider>
-                  <TextField 
+                  <TextField
                     value={this.state.msg}
                     onChange={this.onStaticChange('msg')}
                     onKeyPress={this.handleKeyPress}
                     className="chatInput"
-                    fullWidth={true}
-                    multiLine={true}
+                    fullWidth
+                    multiLine
                     autoFocus
-                    hintText="Your thoughts..." />
+                    hintText="Your thoughts..."
+                  />
                 </MuiThemeProvider>
               </div>
             </div>

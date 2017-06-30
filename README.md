@@ -3,6 +3,8 @@
 Yet another slack like application. Built
 using [Sails](http://sailsjs.org) framework for Node.js.
 
+You can view the demo of the app in Youtube:
+
 [![SlackYY](https://i.ytimg.com/vi/_Ea2GoNJWAI/maxresdefault.jpg)](https://www.youtube.com/watch?v=_Ea2GoNJWAI&feature=youtu.be)
 
 # How to run ?
